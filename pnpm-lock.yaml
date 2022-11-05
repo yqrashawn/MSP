@@ -5,11 +5,13 @@ specifiers:
   '@babel/plugin-proposal-class-properties': ^7.16.7
   '@babel/preset-env': ^7.16.11
   '@babel/preset-react': ^7.16.7
+  '@fluent-wallet/site-metadata': ^0.0.1
   '@hot-loader/react-dom': ^17.0.2
   '@thi.ng/cache': ^2.1.25
   '@thi.ng/csp': ^2.1.25
   '@thi.ng/rstream': ^7.2.25
   '@thi.ng/rstream-csp': ^3.1.27
+  '@thi.ng/transducers': ^8.3.21
   '@types/chrome': ^0.0.177
   '@types/react': ^17.0.39
   '@types/react-dom': ^17.0.11
@@ -45,21 +47,25 @@ specifiers:
   ts-loader: ^9.2.6
   typescript: ^4.5.5
   unocss: ^0.46.1
+  webextension-polyfill: ^0.10.0
   webpack: ^5.68.0
   webpack-cli: ^4.9.2
   webpack-dev-server: ^4.7.4
   zustand: ^4.1.3
 
 dependencies:
+  '@fluent-wallet/site-metadata': 0.0.1
   '@hot-loader/react-dom': 17.0.2_react@17.0.2
   '@thi.ng/cache': 2.1.25
   '@thi.ng/csp': 2.1.25
   '@thi.ng/rstream': 7.2.25
   '@thi.ng/rstream-csp': 3.1.27
+  '@thi.ng/transducers': 8.3.21
   ramda: 0.28.0
   react: 17.0.2
   react-dom: 17.0.2_react@17.0.2
   react-hot-loader: 4.13.0_gzv7pa6nrbev3fs6gyzn7sadkq
+  webextension-polyfill: 0.10.0
   zustand: 4.1.3_react@17.0.2
 
 devDependencies:
@@ -1476,6 +1482,10 @@ packages:
       - supports-color
     dev: true
 
+  /@fluent-wallet/site-metadata/0.0.1:
+    resolution: {integrity: sha512-1Lpz/3XznA0J0/POasn8jR2j0v7yasbXFIfCW8KrjiTTDpFAJmxdfSrFN5CIN/j4IKB8roPfedBU/eeFrFR4Yg==}
+    dev: false
+
   /@hot-loader/react-dom/17.0.2_react@17.0.2:
     resolution: {integrity: sha512-G2RZrFhsQClS+bdDh/Ojpk3SgocLPUGnvnJDTQYnmKSSwXtU+Yh+8QMs+Ia3zaAvBiOSpIIDSUxuN69cvKqrWg==}
     peerDependencies:
@@ -1639,6 +1649,18 @@ packages:
       '@thi.ng/random': 3.3.13
     dev: false
 
+  /@thi.ng/arrays/2.4.0:
+    resolution: {integrity: sha512-dvQN46Zv4ioBL5jwyv0KszP1WyCwHOkwLoUvmRMEMthsD4QQ4OaBBY6KFHSdxiHg09pCyNyAxzMg0RPNa4T5ZA==}
+    engines: {node: '>=12.7'}
+    dependencies:
+      '@thi.ng/api': 8.4.4
+      '@thi.ng/checks': 3.3.2
+      '@thi.ng/compare': 2.1.14
+      '@thi.ng/equiv': 2.1.12
+      '@thi.ng/errors': 2.2.3
+      '@thi.ng/random': 3.3.13
+    dev: false
+
   /@thi.ng/associative/6.2.13:
     resolution: {integrity: sha512-p7H1UlBcyv5zKjB9fvYQr/uKVJL8eVt4TybwFot/uPjxKtIiKKErecIBmsFtEpphe8hI8+EXR8Mjpc9GutQZtQ==}
     engines: {node: '>=12.7'}
@@ -1651,7 +1673,7 @@ packages:
       '@thi.ng/dcons': 3.2.20
       '@thi.ng/equiv': 2.1.12
       '@thi.ng/errors': 2.2.3
-      '@thi.ng/transducers': 8.3.20
+      '@thi.ng/transducers': 8.3.21
       tslib: 2.4.0
     dev: false
 
@@ -1679,7 +1701,7 @@ packages:
     dependencies:
       '@thi.ng/api': 8.4.4
       '@thi.ng/dcons': 3.2.20
-      '@thi.ng/transducers': 8.3.20
+      '@thi.ng/transducers': 8.3.21
     dev: false
 
   /@thi.ng/checks/3.3.2:
@@ -1713,7 +1735,7 @@ packages:
       '@thi.ng/checks': 3.3.2
       '@thi.ng/dcons': 3.2.20
       '@thi.ng/errors': 2.2.3
-      '@thi.ng/transducers': 8.3.20
+      '@thi.ng/transducers': 8.3.21
     dev: false
 
   /@thi.ng/dcons/3.2.20:
@@ -1726,7 +1748,7 @@ packages:
       '@thi.ng/equiv': 2.1.12
       '@thi.ng/errors': 2.2.3
       '@thi.ng/random': 3.3.13
-      '@thi.ng/transducers': 8.3.20
+      '@thi.ng/transducers': 8.3.21
     dev: false
 
   /@thi.ng/equiv/2.1.12:
@@ -1794,15 +1816,15 @@ packages:
       '@thi.ng/checks': 3.3.2
       '@thi.ng/errors': 2.2.3
       '@thi.ng/logger': 1.4.2
-      '@thi.ng/transducers': 8.3.20
+      '@thi.ng/transducers': 8.3.21
     dev: false
 
-  /@thi.ng/transducers/8.3.20:
-    resolution: {integrity: sha512-ubEtZaKOmGCdjRfEKITzYYMb69MAD5S2+GXDjqPJRXkPe2m6d3UVNikTxtm8lUQR6RrIqZiD36X/kitC7sl9Mg==}
+  /@thi.ng/transducers/8.3.21:
+    resolution: {integrity: sha512-gtKd9ryDvwp++DfIc3AtwMLZ4HIg757Kz+TlnYwcF/+xvp/sU5ZTXaOlssqLrPkdnar1ZD35VfuRHzi+33isZA==}
     engines: {node: '>=12.7'}
     dependencies:
       '@thi.ng/api': 8.4.4
-      '@thi.ng/arrays': 2.3.11
+      '@thi.ng/arrays': 2.4.0
       '@thi.ng/checks': 3.3.2
       '@thi.ng/compare': 2.1.14
       '@thi.ng/compose': 2.1.16
@@ -7226,6 +7248,10 @@ packages:
     dependencies:
       minimalistic-assert: 1.0.1
     dev: true
+
+  /webextension-polyfill/0.10.0:
+    resolution: {integrity: sha512-c5s35LgVa5tFaHhrZDnr3FpQpjj1BB+RXhLTYUxGqBVN460HkbM8TBtEqdXWbpTKfzwCcjAZVF7zXCYSKtcp9g==}
+    dev: false
 
   /webpack-cli/4.10.0_vnmgq7jx5zjkzolvtfp7mdf5ri:
     resolution: {integrity: sha512-NLhDfH/h4O6UOy+0LSso42xvYypClINuMNBVVzX4vX98TmTaTUxwRbXdhucbFMd2qLaCTcLq/PdYrvi8onw90w==}
