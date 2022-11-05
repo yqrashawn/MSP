@@ -6,6 +6,8 @@ var webpack = require('webpack'),
   HtmlWebpackPlugin = require('html-webpack-plugin'),
   TerserPlugin = require('terser-webpack-plugin');
 var { CleanWebpackPlugin } = require('clean-webpack-plugin');
+const UnoCSS = require('@unocss/webpack').default;
+const presetWind = require('@unocss/preset-wind').default;
 
 const ASSET_PATH = process.env.ASSET_PATH || '/';
 
@@ -111,6 +113,7 @@ var options = {
     new webpack.ProgressPlugin(),
     // expose and write the allowed env vars on the compiled bundle
     new webpack.EnvironmentPlugin(['NODE_ENV']),
+    UnoCSS({ presets: [presetWind()] }),
     new CopyWebpackPlugin({
       patterns: [
         {
@@ -179,6 +182,7 @@ if (env.NODE_ENV === 'development') {
   options.devtool = 'eval-cheap-module-source-map';
 } else {
   options.optimization = {
+    realContentHash: true,
     minimize: true,
     minimizer: [
       new TerserPlugin({
