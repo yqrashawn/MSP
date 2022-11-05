@@ -1,44 +1,44 @@
-import browser from 'webextension-polyfill';
-import { stream, CloseMode, trace } from '@thi.ng/rstream';
+import { listen } from './listener.js';
+import { sideEffect, filter, map } from '@thi.ng/transducers';
+import { partial } from '@thi.ng/compose';
 
-import '../../assets/img/icon-34.png';
-import '../../assets/img/icon-128.png';
+const { contentScriptStrem } = listen();
 
-const contentScriptStrem = stream({
-  id: 'from-content-script',
-  closeIn: CloseMode.NEVER,
-  closeOut: CloseMode.NEVER,
-  cache: true,
-});
-
-// debug
-// contentScriptStrem.subscribe(trace());
-
-function postMessage(port, msg) {
-  try {
-    port.postMessage();
-  } catch (err) {
-    if (err.message?.includes('object could not be cloned')) {
-      msg = JSON.parse(JSON.stringify(msg));
-      port.postMessage(msg);
-    } else {
-      console.error('[BACKGROUND postMessage]', err);
-    }
-  }
+function getData([data, post]) {
+  return data;
 }
 
-function onConnect(port) {
-  const post = (msg) => postMessage(port, msg);
-  if (port.name === 'content-script') {
-    port.onMessage.addListener((msg) =>
-      contentScriptStrem.next.call(contentScriptStrem, [msg, post])
-    );
-  }
+function isFromMetaMask({ fromMetaMask }) {
+  return fromMetaMask;
 }
 
-function setup() {
-  browser.runtime.onConnect.addListener(onConnect);
-  return { contentScriptStrem };
+function isToMetaMask({ toMetaMask }) {
+  return toMetaMask;
 }
 
-setup();
+function isSendTransaction({ data }) {
+  return data.method === 'eth_sendTransaction';
+}
+
+function logData(fromMetaMask, data) {
+  console.log(fromMetaMask ? 'FROM MM:' : 'TO MM:', data);
+}
+
+contentScriptStrem.transform(
+  map(getData),
+  filter(isFromMetaMask),
+  sideEffect(partial(logData, true))
+);
+
+contentScriptStrem.transform(
+  map(getData),
+  filter(isToMetaMask),
+  sideEffect(partial(logData, false))
+);
+
+contentScriptStrem.transform(
+  map(getData),
+  filter(isFromMetaMask),
+  filter(isSendTransaction),
+  sideEffect(partial(console.log, 'SENDTX:'))
+);

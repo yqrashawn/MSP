@@ -15,6 +15,7 @@
     "@fluent-wallet/site-metadata": "^0.0.1",
     "@hot-loader/react-dom": "^17.0.2",
     "@thi.ng/cache": "^2.1.25",
+    "@thi.ng/compose": "^2.1.16",
     "@thi.ng/csp": "^2.1.25",
     "@thi.ng/rstream": "^7.2.25",
     "@thi.ng/rstream-csp": "^3.1.27",
