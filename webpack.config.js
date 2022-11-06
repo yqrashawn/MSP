@@ -8,6 +8,7 @@ var webpack = require('webpack'),
 var { CleanWebpackPlugin } = require('clean-webpack-plugin');
 const UnoCSS = require('@unocss/webpack').default;
 const presetWind = require('@unocss/preset-wind').default;
+const presetAttributify = require('@unocss/preset-attributify').default;
 
 const ASSET_PATH = process.env.ASSET_PATH || '/';
 
@@ -66,12 +67,14 @@ var options = {
           {
             loader: 'css-loader',
           },
-          {
-            loader: 'sass-loader',
-            options: {
-              sourceMap: true,
-            },
-          },
+          // unocss
+
+          // {
+          //   loader: 'sass-loader',
+          //   options: {
+          //     sourceMap: true,
+          //   },
+          // },
         ],
       },
       {
@@ -113,7 +116,6 @@ var options = {
     new webpack.ProgressPlugin(),
     // expose and write the allowed env vars on the compiled bundle
     new webpack.EnvironmentPlugin(['NODE_ENV']),
-    UnoCSS({ presets: [presetWind()] }),
     new CopyWebpackPlugin({
       patterns: [
         {
@@ -172,6 +174,7 @@ var options = {
       chunks: ['panel'],
       cache: false,
     }),
+    UnoCSS({ presets: [presetWind(), presetAttributify()] }),
   ],
   infrastructureLogging: {
     level: 'info',
