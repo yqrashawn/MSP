@@ -1,7 +1,6 @@
 import browser from 'webextension-polyfill';
 import { stream, CloseMode, trace } from '@thi.ng/rstream';
 
-import '../../assets/img/icon-34.png';
 import '../../assets/img/icon-128.png';
 
 const contentScriptStrem = stream({
